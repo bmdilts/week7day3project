@@ -1,0 +1,13 @@
+.rockDiv{
+  border:1px solid grey;
+  box-shadow: 0 2px 2px 0 grey;
+  margin-top: 1em;
+  padding: 1em;
+  width: fit-content;
+}
+.bucket{
+  box-shadow: 0 2px 2px 0 grey;
+  margin-top: 1em;
+  padding: 1em;
+  width: fit-content;
+}
