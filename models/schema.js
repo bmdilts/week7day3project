@@ -8,14 +8,16 @@ const rocksSchema = new mongoose.Schema ({
   shape: String,
   sizeInMM: {type: Number, required: true},
   type: {type: String, required: true},
-  foundLocation: [{city: String, state: String}],
+  foundLocation: {
+    city: {type: String}, state: {type: String}
+  },
   foundDate: {type: Date, required: true, default: Date.now},
 });
 
 const RockCollection = mongoose.model('RockCollection', rocksSchema);
 
 // let newInstance = new RockCollection ({description: 'Blue quartz from Indy', color: 'blue', shape: 'round', sizeInMM: 25, type: 'quartz', foundLocation: [{city: 'Indianapolis', state: 'IN'}]});
-
+//
 // newInstance.save(function(err){
 //   if(err){
 //     console.log(err);

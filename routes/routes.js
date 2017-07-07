@@ -21,7 +21,7 @@ router.get('/', function(req, res){
 });
 
 router.post('/add', function(req, res){
-  let newInstance = new RockCollection({description: req.body.desc, color: req.body.color, shape: req.body.shape, sizeInMM: req.body.size, type: req.body.type, foundLocation: [{city: req.body.city, state: req.body.state}], date: req.body.date});
+  let newInstance = new RockCollection({description: req.body.desc, color: req.body.color, shape: req.body.shape, sizeInMM: req.body.size, type: req.body.type, foundLocation: {city: req.body.city, state: req.body.state}, date: req.body.date});
   newInstance.save(function(err){
     if(err){
       console.log(err);
@@ -32,31 +32,26 @@ router.post('/add', function(req, res){
 });
 
 router.post('/update', function(req, res){
-  var update = '';
-  if(req.body.updateDesc){
-    update += '{$push: {description: req.body.updateDesc}}';
-  }else if(req.body.updateColor){
-    update += '{$push: {color: req.body.updateColor}}';
-  }else if(req.body.updateShape){
-    update += '{$push: {shape: req.body.updateShape}}';
-  }else if(req.body.updateSize){
-    update += '{$push: {sizeInMM: req.body.updateSize}}';
-  }else if(req.body.updateType){
-    update += '{$push: {type: req.body.updateType}}';
-  }else if(req.body.updateCity){
-    update += '{$push: {foundLocation: [{city: req.body.updateCity}]}}';
-  }else if(req.body.updateState){
-    update += '{$push: {foundLocation: [{state: req.body.updateState}]}}';
-  }else if(req.body.updateDate){
-    update += '{$push: {date: req.body.updateDate}}';
-  }
-  console.log(update);
-  RockCollection.updateOne({_id: req.body.id}, update);
-  res.redirect('/');
+  RockCollection.findOne({_id: req.body.id}, function(err, update){
+    if(err){
+      res.status(404).send(err);
+    } else{
+      update.description = req.body.updateDesc || update.description;
+      update.color= req.body.updateColor || update.color;
+      update.shape= req.body.updateShape || update.shape;
+      update.sizeInMM= req.body.updateSize || update.sizeInMM;
+      update.type= req.body.updateType || update.type;
+      update.foundLocation.city= req.body.updateCity || update.foundLocation.city;
+      update.foundLocation.state= req.body.updateState || update.foundLocation.state;
+      update.date= req.body.updateDate || update.date;
+    }
+    update.save(function(err){
+      if(err){
+        res.status(404).send(err);
+      }
+      res.redirect('/');
+    });
+  });
 });
-
-
-
-
 
 module.exports = router;
