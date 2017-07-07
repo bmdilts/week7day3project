@@ -11,7 +11,7 @@ app.set('views', './views');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static('public'));
 
-const RockCollection = require('../models/schema')
+const RockCollection = require('../models/schema');
 
 router.get('/', function(req, res){
   RockCollection.find()
@@ -53,5 +53,15 @@ router.post('/update', function(req, res){
     });
   });
 });
+
+router.post('/delete', function(req, res){
+  RockCollection.findByIdAndRemove(req.body.deleteID, function(err){
+    if(err){
+      console.log(err);
+    }
+    res.redirect('/');
+  });
+});
+
 
 module.exports = router;

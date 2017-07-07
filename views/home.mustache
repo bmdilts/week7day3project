@@ -24,7 +24,7 @@
     <form class="add" action="/add" method="post">
       <fieldset class="bucket">
         <legend>Add a rock to the collection!</legend>
-        <label for="desc">Enter a description of the rock</label>
+        <label for="desc">Enter a description of the rock</label><br>
         <textarea rows="2" cols="75" maxlength="140" name="desc" required></textarea><br>
         <label for="color">What color was it?</label>
         <input type="text" name="color" placeholder="color?" required><br>
@@ -47,7 +47,7 @@
         <legend>Update a rock in the collection!</legend>
         <label for="id">Which rock do you want to update?</label>
         <input type="text" name="id" placeholder="Enter the ID"><br><br>
-        <label for="updateDesc">Enter a description of the rock</label>
+        <label for="updateDesc">Enter a description of the rock</label><br>
         <textarea rows="2" cols="75" maxlength="140" name="updateDesc"></textarea><br>
         <label for="updateColor">What color was it?</label>
         <input type="text" name="updateColor" placeholder="color?"><br>
@@ -68,21 +68,8 @@
     <form class="delete" action="/delete" method="post">
       <fieldset class="bucket">
         <legend>What rock do you want to delete?</legend>
-        <label for="desc4">Enter a description of the rock</label>
-        <textarea rows="2" cols="75" maxlength="140" name="desc4"></textarea><br>
-        <label for="color4">What color was it?</label>
-        <input type="text" name="color4" placeholder="color?"><br>
-        <label for="shape4">What shape was it?</label>
-        <input type="text" name="shape4"><br>
-        <label for="size4">How big was it (in millimeters)?</label>
-        <input type="text" name="size4"><br>
-        <label for="type4">What type of stone was it?</label>
-        <input type="text" name="type4"><br>
-        <label for="location4">Where did you find it?</label>
-        <input type="text" name="location4" placeholder="City">
-        <input type="text" name="location4" placeholder="State"><br>
-        <label for="date4">When did you find it?</label>
-        <input type="date" name="date4"><br>
+        <label for="delete_id">Please enter the rock's ID</label>
+        <input type="text" name="deleteID"><br>
         <button type="submit" name="submit">Delete a rock!</button>
       </fieldset>
     </form>
